@@ -1,2 +1,11 @@
-# wonga-auth
-frontend application wonga auth application
+
+  # Create User Authentication UI
+
+  This is a code bundle for Create User Authentication UI. 
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
