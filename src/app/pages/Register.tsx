@@ -5,7 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { ShieldCheck, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import wongaLogo from '../../assets/wonga (2).png';
 
 interface RegisterForm {
   firstName: string;
@@ -26,6 +27,7 @@ export const Register = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<RegisterForm>();
 
@@ -60,9 +62,7 @@ export const Register = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
           {/* Header */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
-              <ShieldCheck className="w-8 h-8 text-white" />
-            </div>
+            <img src={wongaLogo} alt="Wonga" className="h-14 w-auto object-contain mb-4" />
             <h1 className="text-2xl tracking-tight text-slate-900">
               Create your account
             </h1>
@@ -105,6 +105,7 @@ export const Register = () => {
                   id="firstName"
                   type="text"
                   placeholder="John"
+                  autoComplete="given-name"
                   className="h-11"
                   {...register('firstName', {
                     required: 'First name is required',
@@ -113,6 +114,7 @@ export const Register = () => {
                       message: 'Must be at least 2 characters',
                     },
                   })}
+                  onInput={(e) => setValue('firstName', (e.target as HTMLInputElement).value, { shouldValidate: true })}
                 />
                 {errors.firstName && (
                   <p className="text-sm text-red-600">{errors.firstName.message}</p>
@@ -127,6 +129,7 @@ export const Register = () => {
                   id="lastName"
                   type="text"
                   placeholder="Doe"
+                  autoComplete="family-name"
                   className="h-11"
                   {...register('lastName', {
                     required: 'Last name is required',
@@ -135,6 +138,7 @@ export const Register = () => {
                       message: 'Must be at least 2 characters',
                     },
                   })}
+                  onInput={(e) => setValue('lastName', (e.target as HTMLInputElement).value, { shouldValidate: true })}
                 />
                 {errors.lastName && (
                   <p className="text-sm text-red-600">{errors.lastName.message}</p>
@@ -158,6 +162,8 @@ export const Register = () => {
                     message: 'Please enter a valid email address',
                   },
                 })}
+                autoComplete="email"
+                onInput={(e) => setValue('email', (e.target as HTMLInputElement).value, { shouldValidate: true })}
               />
               {errors.email && (
                 <p className="text-sm text-red-600">{errors.email.message}</p>
@@ -180,6 +186,8 @@ export const Register = () => {
                     message: 'Password must be at least 6 characters',
                   },
                 })}
+                autoComplete="new-password"
+                onInput={(e) => setValue('password', (e.target as HTMLInputElement).value, { shouldValidate: true })}
               />
               {errors.password && (
                 <p className="text-sm text-red-600">{errors.password.message}</p>
@@ -200,6 +208,8 @@ export const Register = () => {
                   validate: (value) =>
                     value === password || 'Passwords do not match',
                 })}
+                autoComplete="new-password"
+                onInput={(e) => setValue('confirmPassword', (e.target as HTMLInputElement).value, { shouldValidate: true })}
               />
               {errors.confirmPassword && (
                 <p className="text-sm text-red-600">

@@ -5,7 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, AlertCircle } from 'lucide-react';
+import wongaLogo from '../../assets/wonga (2).png';
 
 interface LoginForm {
   email: string;
@@ -21,6 +22,7 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginForm>();
 
@@ -44,9 +46,7 @@ export const Login = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
           {/* Header */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
-              <ShieldCheck className="w-8 h-8 text-white" />
-            </div>
+            <img src={wongaLogo} alt="Wonga" className="h-14 w-auto object-contain mb-4" />
             <h1 className="text-2xl tracking-tight text-slate-900">
               Sign in to your account
             </h1>
@@ -81,6 +81,8 @@ export const Login = () => {
                     message: 'Please enter a valid email address',
                   },
                 })}
+                autoComplete="email"
+                onInput={(e) => setValue('email', (e.target as HTMLInputElement).value, { shouldValidate: true })}
               />
               {errors.email && (
                 <p className="text-sm text-red-600">{errors.email.message}</p>
@@ -103,6 +105,8 @@ export const Login = () => {
                     message: 'Password must be at least 6 characters',
                   },
                 })}
+                autoComplete="current-password"
+                onInput={(e) => setValue('password', (e.target as HTMLInputElement).value, { shouldValidate: true })}
               />
               {errors.password && (
                 <p className="text-sm text-red-600">{errors.password.message}</p>

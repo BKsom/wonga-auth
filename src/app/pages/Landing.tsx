@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/button';
-import { ShieldCheck } from 'lucide-react';
+import wongaLogo from '../../assets/wonga (2).png';
 
 export const Landing = () => {
   const navigate = useNavigate();
@@ -18,9 +18,7 @@ export const Landing = () => {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center space-y-8">
         <div className="flex justify-center">
-          <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center">
-            <ShieldCheck className="w-10 h-10 text-white" />
-          </div>
+          <img src={wongaLogo} alt="Wonga" className="h-16 w-auto object-contain" />
         </div>
         
         <div className="space-y-3">
